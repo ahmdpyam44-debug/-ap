@@ -1,139 +1,310 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#176b3a">
-<meta name="description" content="بازار مستقیم محصولات کشاورزی">
-<title>کشاورز | بازار محصولات کشاورزی</title>
-<style>
-*{box-sizing:border-box}body{margin:0;background:#f5f7f3;color:#203126;font-family:Tahoma,Arial,sans-serif;line-height:1.7}
-header{background:#176b3a;color:#fff;padding:23px 17px;border-radius:0 0 22px 22px}
-.header-inner,main,footer{width:min(100% - 28px,760px);margin:auto}.brand{font-size:28px;font-weight:bold}header p{margin:5px 0;font-size:14px}
-main{padding:18px 0 28px}.intro{background:#e8f3e9;padding:13px;border-radius:12px;font-size:14px}
-h2{font-size:19px;margin:22px 0 12px}input,select,textarea{width:100%;padding:12px;border:1px solid #d5ddd5;border-radius:9px;font:inherit;background:#fff;color:#203126}
-input:focus,select:focus,textarea:focus{outline:2px solid #9bd0aa}.search{margin:14px 0 4px;padding:14px}
-.categories{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.cat{background:#fff;color:#203126;border:1px solid #dfe7de;border-radius:12px;padding:12px 4px;font:inherit;cursor:pointer}.cat span{display:block;font-size:23px}.cat.active{background:#e3f2e6;border-color:#176b3a;color:#10552d;font-weight:bold}
-button{border:0;border-radius:10px;padding:12px;font:inherit;cursor:pointer}button:disabled{opacity:.6}.primary{width:100%;background:#176b3a;color:#fff;font-weight:bold}.secondary{background:#edf3ed;color:#10552d}
-.listing{background:#fff;border:1px solid #dfe7de;border-radius:14px;padding:15px;margin:12px 0;overflow-wrap:anywhere}.listing h3{margin:0}.listing p{margin:6px 0}.price{color:#176b3a;font-size:18px;font-weight:bold}.muted,.form-help{color:#69756c;font-size:13px;line-height:1.9}.contact-btn{display:inline-block;margin-top:8px;background:#176b3a;color:#fff;text-decoration:none;border-radius:9px;padding:8px 12px}
-.status,.empty{background:#fff;border:1px dashed #dfe7de;border-radius:12px;padding:14px;color:#69756c;text-align:center}.status.error{color:#a52828}
-#formbox{display:none;background:#fff;border:1px solid #dfe7de;padding:16px;border-radius:14px;margin-top:16px}label{display:block;margin:12px 0 6px;font-size:14px;font-weight:bold}.form-actions{display:grid;gap:8px;margin-top:16px}
-nav{position:sticky;bottom:0;background:#ffffffed;display:flex;justify-content:space-around;padding:9px;border-top:1px solid #dfe7de;z-index:5}nav button{background:transparent;color:#176b3a}footer{text-align:center;padding:20px 0 28px;color:#69756c;font-size:12px}
-@media(max-width:420px){.categories{grid-template-columns:repeat(2,minmax(0,1fr))}.brand{font-size:25px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#176b3a">
+  <meta name="description" content="بازار مستقیم محصولات کشاورزی؛ ارتباط کشاورزان و خریداران">
+  <title>کشاورز | بازار مستقیم محصولات کشاورزی</title>
+  <style>
+    :root{--green:#176b3a;--green-dark:#10552d;--bg:#f5f7f3;--text:#203126;--muted:#69756c;--border:#dfe7de}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif;line-height:1.7}
+    header{background:linear-gradient(135deg,#176b3a,#23854c);color:#fff;padding:23px 17px;border-radius:0 0 22px 22px}
+    .header-inner,main,footer{width:min(100% - 28px,760px);margin-inline:auto}
+    .brand{font-size:28px;font-weight:bold}header p{margin:5px 0;font-size:14px}
+    main{padding:18px 0 28px}.intro{background:#e8f3e9;border:1px solid #d3e8d6;padding:13px;border-radius:12px;font-size:14px}
+    h2{font-size:19px;margin:22px 0 12px}
+    input,select,textarea{width:100%;padding:12px;border:1px solid #d5ddd5;border-radius:9px;font:inherit;background:#fff;color:var(--text)}
+    input:focus,select:focus,textarea:focus{outline:2px solid #9bd0aa;border-color:var(--green)}
+    .search{margin:14px 0 4px;padding:14px}
+    .categories{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+    button{border:0;border-radius:10px;padding:12px;font:inherit;cursor:pointer}
+    button:disabled{opacity:.6;cursor:wait}
+    .cat{background:#fff;color:var(--text);border:1px solid var(--border);border-radius:12px;padding:12px 4px}
+    .cat span{display:block;font-size:23px}.cat.active{background:#e3f2e6;border-color:var(--green);color:var(--green-dark);font-weight:bold}
+    .primary{width:100%;background:var(--green);color:#fff;font-weight:bold}.primary:hover{background:var(--green-dark)}
+    .secondary{background:#edf3ed;color:var(--green-dark)}
+    .listing{background:#fff;border:1px solid var(--border);border-radius:14px;padding:15px;margin:12px 0;overflow-wrap:anywhere}
+    .listing h3{margin:0}.listing p{margin:6px 0}.price{color:var(--green);font-size:18px;font-weight:bold}
+    .muted,.form-help{color:var(--muted);font-size:13px;line-height:1.9}
+    .contact-btn{display:inline-block;margin-top:8px;background:var(--green);color:#fff;text-decoration:none;border-radius:9px;padding:8px 12px}
+    .status,.empty{background:#fff;border:1px dashed var(--border);border-radius:12px;padding:14px;color:var(--muted);text-align:center}
+    .status.error{color:#a52828;border-color:#e4baba}
+    #formbox{display:none;background:#fff;border:1px solid var(--border);padding:16px;border-radius:14px;margin-top:16px}
+    label{display:block;margin:12px 0 6px;font-size:14px;font-weight:bold}.form-actions{display:grid;gap:8px;margin-top:16px}
+    nav{position:sticky;bottom:0;z-index:5;background:#ffffffed;display:flex;justify-content:space-around;padding:9px;border-top:1px solid var(--border)}
+    nav button{background:transparent;color:var(--green)}footer{text-align:center;padding:20px 0 28px;color:var(--muted);font-size:12px}
+    @media(max-width:420px){.categories{grid-template-columns:repeat(2,minmax(0,1fr))}.brand{font-size:25px}}
+  </style>
 </head>
 <body>
-<header id="home"><div class="header-inner"><div class="brand">🌱 کشاورز</div><p>بدون واسطه، مستقیم از مزرعه به خریدار</p><p>بازار محصولات کشاورزی سراسر ایران 🇮🇷</p></div></header>
-<main>
-<div class="intro">محصولات کشاورزی را جست‌وجو کنید یا آگهی فروش خود را ثبت کنید. آگهی‌ها در پایگاه داده آنلاین ذخیره می‌شوند.</div>
-<input id="search" class="search" type="search" placeholder="🔍 جست‌وجوی محصول، استان، شهر یا توضیحات..." aria-label="جست‌وجو">
-<h2>دسته‌بندی محصولات</h2>
-<div class="categories" id="categories">
-<button class="cat" type="button" data-category="غلات"><span>🌾</span>غلات</button>
-<button class="cat" type="button" data-category="صیفی‌جات"><span>🥔</span>صیفی‌جات</button>
-<button class="cat" type="button" data-category="میوه‌ها"><span>🍎</span>میوه‌ها</button>
-<button class="cat" type="button" data-category="سبزیجات"><span>🥬</span>سبزیجات</button>
-<button class="cat" type="button" data-category="حبوبات"><span>🫘</span>حبوبات</button>
-<button class="cat" type="button" data-category="دانه‌های روغنی"><span>🌻</span>دانه‌های روغنی</button>
-<button class="cat" type="button" data-category="محصولات دامی"><span>🐄</span>محصولات دامی</button>
-<button class="cat" type="button" data-category="نهاده‌های کشاورزی"><span>🚜</span>نهاده‌های کشاورزی</button>
-<button class="cat active" type="button" data-category=""><span>📋</span>همه محصولات</button>
-</div>
-<h2 id="list-heading">آگهی‌های محصولات</h2>
-<div id="status" class="status" role="status">در حال دریافت آگهی‌ها...</div><div id="list" aria-live="polite"></div>
-<button class="primary" id="open-form" type="button">＋ ثبت آگهی فروش محصول</button>
-<section id="formbox">
-<h2>ثبت آگهی فروش</h2><p class="muted">موارد ستاره‌دار الزامی هستند. شماره تماس در آگهی نمایش داده می‌شود.</p>
-<form id="adform">
-<label for="title">نام محصول *</label><input id="title" required maxlength="120" placeholder="مثلاً سیب‌زمینی">
-<label for="category">دسته‌بندی *</label><select id="category" required>
-<option value="غلات">غلات</option><option value="صیفی‌جات">صیفی‌جات</option><option value="میوه‌ها">میوه‌ها</option><option value="سبزیجات">سبزیجات</option><option value="حبوبات">حبوبات</option><option value="دانه‌های روغنی">دانه‌های روغنی</option><option value="محصولات دامی">محصولات دامی</option><option value="نهاده‌های کشاورزی">نهاده‌های کشاورزی</option></select>
-<label for="province">استان *</label><input id="province" required maxlength="80" placeholder="مثلاً همدان">
-<label for="city">شهر</label><input id="city" maxlength="80" placeholder="نام شهر">
-<label for="quantity">مقدار محصول</label><input id="quantity" type="number" min="0" step="any" placeholder="مثلاً 5000">
-<label for="unit">واحد</label><select id="unit"><option>کیلوگرم</option><option>تن</option><option>عدد</option><option>جعبه</option><option>کیسه</option><option>لیتر</option></select>
-<label for="price">قیمت هر واحد به تومان</label><input id="price" type="number" min="0" step="any" placeholder="مثلاً 15000">
-<label for="seller_phone">شماره موبایل فروشنده *</label><input id="seller_phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="25" placeholder="مثلاً 09123456789"><div class="form-help">شماره تماس در آگهی نمایش داده می‌شود.</div>
-<label for="description">توضیحات</label><textarea id="description" rows="4" maxlength="1500" placeholder="کیفیت، زمان برداشت و شرایط فروش"></textarea>
-<div class="form-actions"><button class="primary" id="submit-button" type="submit">ثبت آگهی</button><button class="secondary" id="cancel-form" type="button">انصراف</button></div>
-</form></section>
-</main>
-<nav aria-label="ناوبری"><button type="button" id="home-button">🏠 خانه</button><button type="button" id="search-button">🔍 جست‌وجو</button><button type="button" id="nav-form-button">➕ ثبت آگهی</button></nav>
-<footer>کشاورز | هدف ما ارتباط مستقیم کشاورز و خریدار است.</footer>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-/* فقط از کلید publishable در سایت استفاده کنید؛ هرگز service_role/secret را اینجا نگذارید. */
-const SUPABASE_URL='https://xmvonzprjjujcxukvqag.supabase.co';
-const SUPABASE_KEY='sb_publishable_ytswdaL7ntSvPbWMyQLJ6Q_VDTboj0n';
-const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-const $=id=>document.getElementById(id);
-let products=[],selectedCategory='',isLoading=false;
+  <header id="home">
+    <div class="header-inner">
+      <div class="brand">🌱 کشاورز</div>
+      <p>بدون واسطه، مستقیم از مزرعه به خریدار</p>
+      <p>بازار محصولات کشاورزی سراسر ایران 🇮🇷</p>
+    </div>
+  </header>
 
-function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function digits(v){return String(v??'').replace(/[۰-۹]/g,d=>String('۰۱۲۳۴۵۶۷۸۹'.indexOf(d))).replace(/[٠-٩]/g,d=>String('٠١٢٣٤٥٦٧٨٩'.indexOf(d)));}
-function phoneClean(v){return digits(v).replace(/[^\d+]/g,'');}
-function num(v){const n=Number(v);return Number.isFinite(n)?n.toLocaleString('fa-IR',{maximumFractionDigits:2}):'';}
-function status(message,error=false){$('status').textContent=message;$('status').className=error?'status error':'status';$('status').style.display=message?'block':'none';}
-function updateCats(){document.querySelectorAll('.cat').forEach(b=>b.classList.toggle('active',b.dataset.category===selectedCategory));}
-function filteredProducts(){
- const q=$('search').value.trim().toLocaleLowerCase('fa-IR');
- return products.filter(p=>(!selectedCategory||p.category===selectedCategory)&&[p.title,p.category,p.province,p.city,p.description,p.quantity,p.unit,p.price].join(' ').toLocaleLowerCase('fa-IR').includes(q));
-}
-function render(){
- const items=filteredProducts();
- if(!items.length){$('list').innerHTML='<div class="empty">آگهی‌ای با این مشخصات پیدا نشد.</div>';return;}
- $('list').innerHTML=items.map(p=>{
-  const ph=phoneClean(p.seller_phone),safePh=/^\+?[0-9]{5,20}$/.test(ph)?ph:'';
-  const loc=[p.province,p.city].filter(Boolean).map(esc).join('، ')||'موقعیت ثبت نشده';
-  const qty=p.quantity!==null&&p.quantity!==undefined&&p.quantity!==''?num(p.quantity):'تماس بگیرید';
-  const price=p.price!==null&&p.price!==undefined&&p.price!==''?num(p.price)+' تومان':'قیمت توافقی';
-  return `<article class="listing"><h3>🌿 ${esc(p.title)}</h3><p class="muted">📍 ${loc} · ${esc(p.category||'بدون دسته‌بندی')}</p><p>📦 مقدار: ${esc(qty)} ${esc(p.unit||'')}</p><p class="price">${esc(price)}</p>${p.description?`<p class="muted">${esc(p.description).replace(/\n/g,'<br>')}</p>`:''}${safePh?`<a class="contact-btn" href="tel:${esc(safePh)}">📞 تماس با فروشنده</a>`:'<p class="muted">شماره تماس ثبت نشده است.</p>'}</article>`;
- }).join('');
-}
-async function loadProducts(){
- isLoading=true;status('در حال دریافت آگهی‌ها...');
- try{
-  const {data,error}=await db.from('products').select('id,title,category,province,city,quantity,unit,price,description,seller_phone,created_at,is_active').eq('is_active',true).order('created_at',{ascending:false});
-  if(error)throw error;
-  products=Array.isArray(data)?data:[];
-  status(products.length?'':'هنوز آگهی فعالی ثبت نشده است.');render();
- }catch(e){
-  console.error('Supabase load error:',e);
-  status('دریافت آگهی‌ها ناموفق بود. اینترنت، تنظیمات Supabase و مجوز خواندن جدول products را بررسی کنید.',true);
-  $('list').innerHTML='';
- }finally{isLoading=false;}
-}
-function showForm(){$('formbox').style.display='block';$('formbox').scrollIntoView({behavior:'smooth',block:'start'});}
-function hideForm(){$('formbox').style.display='none';}
-function numberOrNull(v){v=digits(v).trim();if(!v)return null;const n=Number(v);return Number.isFinite(n)&&n>=0?n:null;}
+  <main>
+    <div class="intro">محصولات کشاورزی را جست‌وجو کنید یا آگهی فروش خود را ثبت کنید. آگهی‌ها در پایگاه داده آنلاین ذخیره می‌شوند.</div>
+    <input id="search" class="search" type="search" placeholder="🔍 جست‌وجوی محصول، استان، شهر یا توضیحات..." aria-label="جست‌وجو">
 
-$('categories').addEventListener('click',e=>{
- const b=e.target.closest('button[data-category]');if(!b)return;
- selectedCategory=b.dataset.category||'';updateCats();render();$('list-heading').scrollIntoView({behavior:'smooth',block:'start'});
-});
-$('search').addEventListener('input',render);
-$('open-form').addEventListener('click',showForm);
-$('nav-form-button').addEventListener('click',showForm);
-$('cancel-form').addEventListener('click',hideForm);
-$('home-button').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
-$('search-button').addEventListener('click',()=>{$('search').focus();$('search').scrollIntoView({behavior:'smooth',block:'center'});});
+    <h2>دسته‌بندی محصولات</h2>
+    <div class="categories" id="categories">
+      <button class="cat" type="button" data-category="غلات"><span>🌾</span>غلات</button>
+      <button class="cat" type="button" data-category="صیفی‌جات"><span>🥔</span>صیفی‌جات</button>
+      <button class="cat" type="button" data-category="میوه‌ها"><span>🍎</span>میوه‌ها</button>
+      <button class="cat" type="button" data-category="سبزیجات"><span>🥬</span>سبزیجات</button>
+      <button class="cat" type="button" data-category="حبوبات"><span>🫘</span>حبوبات</button>
+      <button class="cat" type="button" data-category="دانه‌های روغنی"><span>🌻</span>دانه‌های روغنی</button>
+      <button class="cat" type="button" data-category="محصولات دامی"><span>🐄</span>محصولات دامی</button>
+      <button class="cat" type="button" data-category="نهاده‌های کشاورزی"><span>🚜</span>نهاده‌های کشاورزی</button>
+      <button class="cat active" type="button" data-category=""><span>📋</span>همه محصولات</button>
+    </div>
 
-$('adform').addEventListener('submit',async e=>{
- e.preventDefault();const form=$('adform');if(!form.reportValidity())return;
- const ph=phoneClean($('seller_phone').value);
- if(!/^\+?[0-9]{10,15}$/.test(ph)){alert('شماره تماس را درست وارد کنید؛ مثال: 09123456789');$('seller_phone').focus();return;}
- const qr=$('quantity').value,pr=$('price').value,q=numberOrNull(qr),p=numberOrNull(pr);
- if(qr.trim()&&q===null){alert('مقدار باید عدد صفر یا بیشتر باشد.');return;}
- if(pr.trim()&&p===null){alert('قیمت باید عدد صفر یا بیشتر باشد.');return;}
- const row={title:$('title').value.trim(),category:$('category').value,province:$('province').value.trim(),city:$('city').value.trim()||null,quantity:q,unit:$('unit').value||'کیلوگرم',price:p,description:$('description').value.trim()||null,seller_phone:ph,is_active:true};
- const btn=$('submit-button');btn.disabled=true;btn.textContent='در حال ثبت...';
- try{
-  const {error}=await db.from('products').insert(row);if(error)throw error;
-  alert('آگهی با موفقیت ثبت شد.');form.reset();hideForm();selectedCategory='';$('search').value='';updateCats();await loadProducts();$('list-heading').scrollIntoView({behavior:'smooth',block:'start'});
- }catch(err){console.error('Supabase insert error:',err);alert('ثبت آگهی انجام نشد. اتصال اینترنت و مجوز INSERT جدول products در Supabase را بررسی کنید.\nجزئیات: '+(err.message||'خطای نامشخص'));}
- finally{btn.disabled=false;btn.textContent='ثبت آگهی';}
-});
-updateCats();loadProducts();
-</script>
+    <h2 id="list-heading">آگهی‌های محصولات</h2>
+    <div id="status" class="status" role="status">در حال دریافت آگهی‌ها...</div>
+    <div id="list" aria-live="polite"></div>
+    <button class="primary" id="open-form" type="button">＋ ثبت آگهی فروش محصول</button>
+
+    <section id="formbox">
+      <h2>ثبت آگهی فروش</h2>
+      <p class="muted">موارد ستاره‌دار الزامی هستند. شماره تماس در آگهی نمایش داده می‌شود.</p>
+      <form id="adform">
+        <label for="title">نام محصول *</label>
+        <input id="title" required maxlength="120" placeholder="مثلاً سیب‌زمینی">
+
+        <label for="category">دسته‌بندی *</label>
+        <select id="category" required>
+          <option value="غلات">غلات</option><option value="صیفی‌جات">صیفی‌جات</option>
+          <option value="میوه‌ها">میوه‌ها</option><option value="سبزیجات">سبزیجات</option>
+          <option value="حبوبات">حبوبات</option><option value="دانه‌های روغنی">دانه‌های روغنی</option>
+          <option value="محصولات دامی">محصولات دامی</option><option value="نهاده‌های کشاورزی">نهاده‌های کشاورزی</option>
+        </select>
+
+        <label for="province">استان *</label>
+        <input id="province" required maxlength="80" placeholder="مثلاً همدان">
+        <label for="city">شهر</label>
+        <input id="city" maxlength="80" placeholder="نام شهر">
+        <label for="quantity">مقدار محصول</label>
+        <input id="quantity" type="number" min="0" step="any" placeholder="مثلاً 5000">
+        <label for="unit">واحد</label>
+        <select id="unit"><option>کیلوگرم</option><option>تن</option><option>عدد</option><option>جعبه</option><option>کیسه</option><option>لیتر</option></select>
+        <label for="price">قیمت هر واحد به تومان</label>
+        <input id="price" type="number" min="0" step="any" placeholder="مثلاً 15000">
+        <label for="seller_phone">شماره موبایل فروشنده *</label>
+        <input id="seller_phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="25" placeholder="مثلاً 09123456789">
+        <div class="form-help">شماره تماس در آگهی نمایش داده می‌شود.</div>
+        <label for="description">توضیحات</label>
+        <textarea id="description" rows="4" maxlength="1500" placeholder="کیفیت، زمان برداشت و شرایط فروش"></textarea>
+        <div class="form-actions">
+          <button class="primary" id="submit-button" type="submit">ثبت آگهی</button>
+          <button class="secondary" id="cancel-form" type="button">انصراف</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <nav aria-label="ناوبری">
+    <button type="button" id="home-button">🏠 خانه</button>
+    <button type="button" id="search-button">🔍 جست‌وجو</button>
+    <button type="button" id="nav-form-button">➕ ثبت آگهی</button>
+  </nav>
+  <footer>کشاورز | هدف ما ارتباط مستقیم کشاورز و خریدار است.</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // از کلید publishable استفاده کنید؛ کلید service_role یا secret را هرگز در سایت قرار ندهید.
+    const SUPABASE_URL = 'https://xmvonzprjjujcxukvqag.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_ytswdaL7ntSvPbWMyQLJ6Q_VDTboj0n';
+    const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const $ = (id) => document.getElementById(id);
+    let products = [];
+    let selectedCategory = '';
+
+    function escapeHtml(value) {
+      return String(value ?? '').replace(/[&<>"']/g, c => ({
+        '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+      }[c]));
+    }
+
+    function normalizeDigits(value) {
+      return String(value ?? '')
+        .replace(/[۰-۹]/g, d => String('۰۱۲۳۴۵۶۷۸۹'.indexOf(d)))
+        .replace(/[٠-٩]/g, d => String('٠١٢٣٤٥٦٧٨٩'.indexOf(d)));
+    }
+
+    function cleanPhone(value) {
+      return normalizeDigits(value).replace(/[^\d+]/g, '');
+    }
+
+    function formatNumber(value) {
+      const n = Number(value);
+      return Number.isFinite(n) ? n.toLocaleString('fa-IR', {maximumFractionDigits: 2}) : '';
+    }
+
+    function setStatus(message, isError = false) {
+      $('status').textContent = message;
+      $('status').className = isError ? 'status error' : 'status';
+      $('status').style.display = message ? 'block' : 'none';
+    }
+
+    function updateCategoryButtons() {
+      document.querySelectorAll('.cat').forEach(button => {
+        button.classList.toggle('active', button.dataset.category === selectedCategory);
+      });
+    }
+
+    function getFilteredProducts() {
+      const query = $('search').value.trim().toLocaleLowerCase('fa-IR');
+      return products.filter(p => {
+        const matchesCategory = !selectedCategory || p.category === selectedCategory;
+        const text = [p.title, p.category, p.province, p.city, p.description, p.quantity, p.unit, p.price]
+          .join(' ').toLocaleLowerCase('fa-IR');
+        return matchesCategory && text.includes(query);
+      });
+    }
+
+    function renderProducts() {
+      const items = getFilteredProducts();
+      if (!items.length) {
+        $('list').innerHTML = '<div class="empty">آگهی‌ای با این مشخصات پیدا نشد.</div>';
+        return;
+      }
+
+      $('list').innerHTML = items.map(p => {
+        const phone = cleanPhone(p.seller_phone);
+        const validPhone = /^\+?[0-9]{5,20}$/.test(phone) ? phone : '';
+        const location = [p.province, p.city].filter(Boolean).map(escapeHtml).join('، ') || 'موقعیت ثبت نشده';
+        const quantity = p.quantity !== null && p.quantity !== undefined && p.quantity !== '' ? formatNumber(p.quantity) : 'تماس بگیرید';
+        const price = p.price !== null && p.price !== undefined && p.price !== '' ? formatNumber(p.price) + ' تومان' : 'قیمت توافقی';
+
+        return `<article class="listing">
+          <h3>🌿 ${escapeHtml(p.title)}</h3>
+          <p class="muted">📍 ${location} · ${escapeHtml(p.category || 'بدون دسته‌بندی')}</p>
+          <p>📦 مقدار: ${escapeHtml(quantity)} ${escapeHtml(p.unit || '')}</p>
+          <p class="price">${escapeHtml(price)}</p>
+          ${p.description ? `<p class="muted">${escapeHtml(p.description).replace(/\n/g, '<br>')}</p>` : ''}
+          ${validPhone ? `<a class="contact-btn" href="tel:${escapeHtml(validPhone)}">📞 تماس با فروشنده</a>` : '<p class="muted">شماره تماس ثبت نشده است.</p>'}
+        </article>`;
+      }).join('');
+    }
+
+    async function loadProducts() {
+      setStatus('در حال دریافت آگهی‌ها...');
+      try {
+        const { data, error } = await db.from('products')
+          .select('id,title,category,province,city,quantity,unit,price,description,seller_phone,created_at,is_active')
+          .eq('is_active', true)
+          .order('created_at', {ascending: false});
+        if (error) throw error;
+        products = Array.isArray(data) ? data : [];
+        setStatus(products.length ? '' : 'هنوز آگهی فعالی ثبت نشده است.');
+        renderProducts();
+      } catch (error) {
+        console.error('خطا در دریافت آگهی‌ها:', error);
+        setStatus('دریافت آگهی‌ها ناموفق بود. اینترنت، تنظیمات Supabase و مجوز خواندن جدول products را بررسی کنید.', true);
+        $('list').innerHTML = '';
+      }
+    }
+
+    function showForm() {
+      $('formbox').style.display = 'block';
+      $('formbox').scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+
+    function hideForm() {
+      $('formbox').style.display = 'none';
+    }
+
+    function numberOrNull(value) {
+      const v = normalizeDigits(value).trim();
+      if (!v) return null;
+      const n = Number(v);
+      return Number.isFinite(n) && n >= 0 ? n : null;
+    }
+
+    $('categories').addEventListener('click', event => {
+      const button = event.target.closest('button[data-category]');
+      if (!button) return;
+      selectedCategory = button.dataset.category || '';
+      updateCategoryButtons();
+      renderProducts();
+      $('list-heading').scrollIntoView({behavior: 'smooth', block: 'start'});
+    });
+
+    $('search').addEventListener('input', renderProducts);
+    $('open-form').addEventListener('click', showForm);
+    $('nav-form-button').addEventListener('click', showForm);
+    $('cancel-form').addEventListener('click', hideForm);
+    $('home-button').addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+    $('search-button').addEventListener('click', () => {
+      $('search').focus();
+      $('search').scrollIntoView({behavior: 'smooth', block: 'center'});
+    });
+
+    $('adform').addEventListener('submit', async event => {
+      event.preventDefault();
+      const form = $('adform');
+      if (!form.reportValidity()) return;
+
+      const phone = cleanPhone($('seller_phone').value);
+      if (!/^\+?[0-9]{10,15}$/.test(phone)) {
+        alert('شماره تماس را درست وارد کنید؛ مثال: 09123456789');
+        $('seller_phone').focus();
+        return;
+      }
+
+      const quantityText = $('quantity').value;
+      const priceText = $('price').value;
+      const quantity = numberOrNull(quantityText);
+      const price = numberOrNull(priceText);
+      if (quantityText.trim() && quantity === null) { alert('مقدار باید عدد صفر یا بیشتر باشد.'); return; }
+      if (priceText.trim() && price === null) { alert('قیمت باید عدد صفر یا بیشتر باشد.'); return; }
+
+      const row = {
+        title: $('title').value.trim(),
+        category: $('category').value,
+        province: $('province').value.trim(),
+        city: $('city').value.trim() || null,
+        quantity,
+        unit: $('unit').value || 'کیلوگرم',
+        price,
+        description: $('description').value.trim() || null,
+        seller_phone: phone,
+        is_active: true
+      };
+
+      const button = $('submit-button');
+      button.disabled = true;
+      button.textContent = 'در حال ثبت...';
+
+      try {
+        const { error } = await db.from('products').insert(row);
+        if (error) throw error;
+        alert('آگهی با موفقیت ثبت شد.');
+        form.reset();
+        hideForm();
+        selectedCategory = '';
+        $('search').value = '';
+        updateCategoryButtons();
+        await loadProducts();
+        $('list-heading').scrollIntoView({behavior: 'smooth', block: 'start'});
+      } catch (error) {
+        console.error('خطا در ثبت آگهی:', error);
+        alert('ثبت آگهی انجام نشد. اینترنت و مجوز INSERT جدول products در Supabase را بررسی کنید.\nجزئیات: ' + (error.message || 'خطای نامشخص'));
+      } finally {
+        button.disabled = false;
+        button.textContent = 'ثبت آگهی';
+      }
+    });
+
+    updateCategoryButtons();
+    loadProducts();
+  </script>
 </body>
 </html>
