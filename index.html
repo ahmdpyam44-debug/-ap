@@ -103,6 +103,7 @@ function render(){
  <p>📦 مقدار: ${esc(a.quantity||'تماس بگیرید')} ${esc(a.unit||'')}</p>
  <p class="price">${a.price?Number(a.price).toLocaleString('fa-IR')+' تومان':'قیمت توافقی'}</p>
  <p class="muted">${esc(a.description||'')}</p>
+ ${a.seller_phone ? `<a class="contact-btn" href="tel:${encodeURIComponent(a.seller_phone)}">📞 تماس با فروشنده</a>` : ''}
  </article>`).join(''):'<p>محصولی پیدا نشد.</p>';
 }
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
