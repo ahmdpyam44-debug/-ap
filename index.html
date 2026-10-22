@@ -116,5 +116,77 @@ document.getElementById('adform').addEventListener('submit',e=>{
 });
 render();
 </script>
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = 'https://xmvonzprjjujcxukvqag.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_ytswdaL7ntSvPbWMyQLJ6Q_VDTboj0n';
+
+const db = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+const oldForm = document.getElementById('adform');
+
+if (oldForm) {
+  const newForm = oldForm.cloneNode(true);
+  oldForm.replaceWith(newForm);
+
+  newForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const get = id => newForm.querySelector('#' + id).value.trim();
+
+    const row = {
+      title: get('title'),
+      category: get('category'),
+      province: get('province'),
+      city: get('city'),
+      quantity: Number(get('quantity')) || null,
+      unit: get('unit') || 'کیلوگرم',
+      price: Number(get('price')) || null,
+      description: get('description'),
+      is_active: true
+    };
+
+    const button = newForm.querySelector('button[type="submit"]');
+    if (button) button.disabled = true;
+
+    const { error } = await db.from('products').insert(row);
+
+    if (button) button.disabled = false;
+
+    if (error) {
+      alert('ثبت آگهی انجام نشد: ' + error.message);
+      return;
+    }
+
+    alert('آگهی با موفقیت در دیتابیس کشاورز ذخیره شد!');
+
+    newForm.reset();
+    await loadProducts();
+  });
+}
+
+async function loadProducts() {
+  const { data, error } = await db
+    .from('products')
+    .select('*')
+    .eq('is_active', true)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  if (typeof ads !== 'undefined') {
+    ads = data || [];
+    render();
+  }
+}
+
+loadProducts();
+</script>
 </body>
 </html>
